@@ -1,12 +1,15 @@
 version: '3.8'
 services:
-  web:
+  nextjs:
+    container_name: nextjs
+    restart: always
     build:
       context: ./
+      dockerfile: Dockerfile
       target: runner
     volumes:
-      - .:/app
-    command: yarn run start
+      - /app/node_modules
+      - /app/.next
     ports:
       - "3000:3000"
     environment:
