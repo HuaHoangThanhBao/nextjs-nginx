@@ -43,3 +43,19 @@ jobs:
 
       - name: Verify
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+  build:
+    name: Deploy to DigitalOcean
+    needs: docker
+    runs-on: ubuntu-22.04
+    steps:
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }} && 
+          docker ps -aq && 
+          docker ps -aq | xargs -r docker rm -f && 
+          docker run -d -p ${{ vars.PORT }}:${{ vars.PORT }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG }}
