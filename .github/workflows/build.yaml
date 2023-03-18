@@ -48,3 +48,10 @@ jobs:
         script: docker ps -aq | xargs -r docker rm -f && 
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG }} && 
           docker run -dp ${{ vars.PORT }}:${{ vars.PORT }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG }}
+    - name: remove unused images
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: docker rmi $(docker images -q -f dangling=true)
