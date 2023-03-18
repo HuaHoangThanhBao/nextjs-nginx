@@ -18,7 +18,7 @@ export default function Home() {
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
-            <code className={styles.code}>Hello everyone my name is Next</code>
+            <code className={styles.code}>Hello everyone my name is Nextjs - Build with Docker</code>
           </p>
           <div>
             <a
