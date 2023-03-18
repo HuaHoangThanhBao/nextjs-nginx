@@ -17,8 +17,8 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            Get started by editing &nbsp;
-            <code className={styles.code}>Hello everyone</code>
+            Get started by editing&nbsp;
+            <code className={styles.code}>Hello everyone my name is Next</code>
           </p>
           <div>
             <a
