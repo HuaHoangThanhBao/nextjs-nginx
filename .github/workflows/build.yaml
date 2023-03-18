@@ -58,4 +58,4 @@ jobs:
         script: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }} && 
           docker ps -aq && 
           docker ps -aq | xargs -r docker rm -f && 
-          docker run -dp -p ${{ vars.PORT }}:${{ vars.PORT }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG }}
+          docker run -d -p ${{ vars.PORT }}:${{ vars.PORT }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG }}
