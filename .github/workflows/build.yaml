@@ -46,4 +46,5 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: docker ps -aq | xargs -r docker rm -f && 
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG }} && 
           docker run -dp ${{ vars.PORT }}:${{ vars.PORT }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:${{ vars.IMAGE_TAG }}
